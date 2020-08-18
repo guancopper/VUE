@@ -14,7 +14,7 @@
         </el-radio-group>
     </div>
     <div id="app" class="wrapper">
-      <div v-for="item in row1" :key="item.id" class="wrapper-content">
+      <div v-for="item in row" :key="item.id" class="wrapper-content">
         <station
         :WTID='item.WTID'
         :Tatalactivepower='item.Tatalactivepower'
@@ -40,53 +40,70 @@ export default {
     return {
       kw:"130",
       radio:1,
+      start:1,
+      end:5,
       windspeed:"10",
-      wt1:'',
+      wt:'',
       Totalactivepower:'0',
       AVR_windspeed:'0',
       Q_total:'0',
       NumWT_in_Power_production:'0',
       NumWT_comfail:'0',
       NumWT_in_lock:'0',
-      row:[],
+      row:[{WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"},
+      {WTID:"0",Tatalactivepower:"0",P_set_adjust_help:"0",Q_total:"0",Q_set_point:"0",Windspeed:"0"}],
       row1:[],
       row2:[],
       row3:[]
     }
   },
   methods:{
-    changeHandler1(value) {
+    get() {
+      //let i= 1
+      for(var i=1;i<=15;i++){
+        let tagnames = "WT"+i+"."+"ActivePower"+","
+              +"WT"+i+"."+"ActivePowerDemand"+","
+              +"WT"+i+"."+"ReactivePower"+","
+              +"WT"+i+"."+"ReactivePowerDemand"+","
+              +"WT"+i+"."+"WindSpeed";
+        let id = "WT"+i
+        console.log(tagnames)
+        // this.$axios.get("/api/values/GetSnapshot",{
+        //   params: {
+        //     tagName: tagnames
+        //   }
+        // }).then((response) =>{
+        //   console.log(tagnames);
+        //   let WTData = {WTID:id,
+        //   Tatalactivepower:parseFloat(response.data[0].Value).toFixed(0),
+        //   P_set_adjust_help:parseFloat(response.data[1].Value).toFixed(0),
+        //   Q_total:parseFloat(response.data[2].Value).toFixed(0),
+        //   Q_set_point:parseFloat(response.data[3].Value).toFixed(0),
+        //   Windspeed:parseFloat(response.data[4].Value).toFixed(0)};
+        //   this.$set(this.row,i-1,WTData);
+        // });
+      }
 
     }
   },
   mounted() {
-    for(var i=1;i<=1;i++){
-      if(i==1){
-        this.wt1 = this.wt1+"WT"+i+"."+"ActivePower"+","
-        +"WT"+i+"."+"ActivePowerDemand"+","
-        +"WT"+i+"."+"ReactivePower"+","
-        +"WT"+i+"."+"ReactivePowerDemand"+","
-        +"WT"+i+"."+"WindSpeed"
-      }else{
-        this.wt1 = this.wt1+"WT"+i+"."+"ActivePower"+","
-        +"WT"+i+"."+"ActivePowerDemand"+","
-        +"WT"+i+"."+"ReactivePower"+","
-        +"WT"+i+"."+"ReactivePowerDemand"+","
-        +"WT"+i+"."+"WindSpeed"+","
-      }
-      this.$axios.get("/api/values/GetSnapshot",{
-        params: {
-          tagName: this.wt1
-        }
-      }).then((response) =>{
-        this.row1.push({WTID:response.data[0].TagName.substring(0,3),
-        Tatalactivepower:parseFloat(response.data[0].Value).toFixed(2),
-        P_set_adjust_help:parseFloat(response.data[1].Value).toFixed(2),
-        Q_total:parseFloat(response.data[2].Value).toFixed(2),
-        Q_set_point:parseFloat(response.data[3].Value).toFixed(2),
-        Windspeed:parseFloat(response.data[4].Value).toFixed(2)})
-      })
-    }
+    this.timer = setInterval(this.get, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   }
 }
 </script>

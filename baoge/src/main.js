@@ -19,6 +19,7 @@ Vue.use(VCharts)
 Vue.use(Contentmenu)
 Vue.prototype.$FileSaver = FileSaver;
 Vue.prototype.$XLSX = XLSX;
+//axios.defaults.baseURL = '/api'
 Vue.prototype.$axios = axios;
 Vue.prototype.$echarts=echarts;
 /* eslint-disable no-new */

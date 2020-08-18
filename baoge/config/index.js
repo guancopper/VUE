@@ -9,7 +9,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-              target: 'http://192.168.152.144:5000/api',
+              target: 'http://192.168.152.146:5000/api',
               changeOrigin: true,
               pathRewrite: {
                 '^/api': ''
@@ -17,7 +17,7 @@ module.exports = {
             }
     },
 
-    host: 'localhost',
+    host: '10.24.31.206',
     port: 8080,
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -44,7 +44,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
-
+    env: require('./prod.env.js'),
     /**
      * Source Maps
      */

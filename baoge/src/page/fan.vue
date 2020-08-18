@@ -7,22 +7,22 @@
               <div class="lds-hourglass"></div>
             </div>
           </td>
-          <td style="width: 200px;"><p style="float: left;">{{WTID}}</p></td>
+          <td style="width: 185px;"><p style="float: left;">ID:{{WTID}}</p></td>
         </tr>
         <tr>
-          <td style="width: 200px;"><p style="float: left;">风速:{{Windspeed}}(m/s)</p></td>
+          <td style="width: 185px;"><p style="float: left;">风速:{{Windspeed}}(m/s)</p></td>
         </tr>
         <tr>
-          <td style="width: 200px;"><p style="float: left;">有功功率:{{Tatalactivepower}}KW</p></td>
+          <td style="width: 185px;"><p style="float: left;">有功功率:{{Tatalactivepower}}KW</p></td>
         </tr>
         <tr>
-          <td style="width: 200px;"><p style="float: left;">无功功率:{{Q_total}}KV</p></td>
+          <td style="width: 185px;"><p style="float: left;">无功功率:{{Q_total}}KV</p></td>
         </tr>
         <tr>
-          <td style="width: 200px;"><p style="float: left;">有功设定值:{{P_set_adjust_help}}KW</p></td>
+          <td style="width: 185px;"><p style="float: left;">有功设定值:{{P_set_adjust_help}}KW</p></td>
         </tr>
         <tr>
-          <td style="width: 200px;"><p style="float: left;">有功设定值:{{Q_set_point}}KV</p></td>
+          <td style="width: 185px;"><p style="float: left;">有功设定值:{{Q_set_point}}KV</p></td>
         </tr>
       </table>
       <v-contextmenu ref="contextmenu">
