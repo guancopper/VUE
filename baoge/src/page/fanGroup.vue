@@ -72,34 +72,42 @@ export default {
   },
   methods:{
     get() {
-      //let i= 1
-      for(var i=1;i<=15;i++){
-        let tagnames = "WT"+i+"."+"ActivePower"+","
-              +"WT"+i+"."+"ActivePowerDemand"+","
-              +"WT"+i+"."+"ReactivePower"+","
-              +"WT"+i+"."+"ReactivePowerDemand"+","
-              +"WT"+i+"."+"WindSpeed";
-        let id = "WT"+i
-        console.log(tagnames)
-        // this.$axios.get("/api/values/GetSnapshot",{
-        //   params: {
-        //     tagName: tagnames
-        //   }
-        // }).then((response) =>{
-        //   console.log(tagnames);
-        //   let WTData = {WTID:id,
-        //   Tatalactivepower:parseFloat(response.data[0].Value).toFixed(0),
-        //   P_set_adjust_help:parseFloat(response.data[1].Value).toFixed(0),
-        //   Q_total:parseFloat(response.data[2].Value).toFixed(0),
-        //   Q_set_point:parseFloat(response.data[3].Value).toFixed(0),
-        //   Windspeed:parseFloat(response.data[4].Value).toFixed(0)};
-        //   this.$set(this.row,i-1,WTData);
-        // });
-      }
-
+      // let i= 1
+      // let tagnames = "WT"+i+"."+"ActivePower"+","
+      //       +"WT"+i+"."+"ActivePowerDemand"+","
+      //       +"WT"+i+"."+"ReactivePower"+","
+      //       +"WT"+i+"."+"ReactivePowerDemand"+","
+      //       +"WT"+i+"."+"WindSpeed";
+      // let id = "WT"+i
+      //console.log(tagnames)
+      // for(var i=0;i<15;i++){
+      this.$axios.get("/api/values/GetSnapshot",{
+        params: {
+          tagName:this.row1[0]
+        }
+      }).then((response) =>{
+        console.log(this.row1[0])
+        let WTData = {WTID:1,
+        Tatalactivepower:parseFloat(response.data[0].Value).toFixed(0),
+        P_set_adjust_help:parseFloat(response.data[1].Value).toFixed(0),
+        Q_total:parseFloat(response.data[2].Value).toFixed(0),
+        Q_set_point:parseFloat(response.data[3].Value).toFixed(0),
+        Windspeed:parseFloat(response.data[4].Value).toFixed(0)};
+        this.$set(this.row,0,WTData);
+      });
+      //}
     }
   },
   mounted() {
+    for(var i=1;i<=33;i++){
+      let tagname = "WT"+i+"."+"ActivePower"+","
+            +"WT"+i+"."+"ActivePowerDemand"+","
+            +"WT"+i+"."+"ReactivePower"+","
+            +"WT"+i+"."+"ReactivePowerDemand"+","
+            +"WT"+i+"."+"WindSpeed";
+      let name = {tag:tagname};
+      this.$set(this.row1,i-1,tagname)
+    }
     this.timer = setInterval(this.get, 1000);
   },
   beforeDestroy() {
