@@ -13,16 +13,16 @@
           <td style="width: 185px;"><p style="float: left;">风速:{{Windspeed}}(m/s)</p></td>
         </tr>
         <tr>
-          <td style="width: 185px;"><p style="float: left;">有功功率:{{Tatalactivepower}}KW</p></td>
+          <td style="width: 185px;"><p style="float: left;">有功功率:{{activepowerkw}}KW</p></td>
         </tr>
         <tr>
-          <td style="width: 185px;"><p style="float: left;">无功功率:{{Q_total}}KV</p></td>
+          <td style="width: 185px;"><p style="float: left;">无功功率:{{reactivepowerkv}}KV</p></td>
         </tr>
         <tr>
-          <td style="width: 185px;"><p style="float: left;">有功设定值:{{P_set_adjust_help}}KW</p></td>
+          <td style="width: 185px;"><p style="float: left;">有功设定值:{{activepowerdemand}}KW</p></td>
         </tr>
         <tr>
-          <td style="width: 185px;"><p style="float: left;">有功设定值:{{Q_set_point}}KV</p></td>
+          <td style="width: 185px;"><p style="float: left;">无功设定值:{{reactivepowerdemand}}KV</p></td>
         </tr>
       </table>
       <v-contextmenu ref="contextmenu">
@@ -78,7 +78,7 @@ export default {
       this.$refs.contextmenu.hide()
     }
   },
-  props:['WTID','Tatalactivepower','P_set_adjust_help','Q_total','Q_set_point','Windspeed']
+  props:['WTID','activepowerkw','reactivepowerkv','activepowerdemand','reactivepowerdemand','Windspeed']
 }
 </script>
 
