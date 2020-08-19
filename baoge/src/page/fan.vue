@@ -26,22 +26,32 @@
         </tr>
       </table>
       <v-contextmenu ref="contextmenu">
-          <v-contextmenu-item @click="handleClick">设置样板机</v-contextmenu-item>
-          <v-contextmenu-item @click="handleClick">取消样板机</v-contextmenu-item>
+          <v-contextmenu-item @click="handleClick1">设置样板机</v-contextmenu-item>
+          <v-contextmenu-item @click="handleClick2">取消样板机</v-contextmenu-item>
           <v-contextmenu-item @click="dialogFormVisible = true">有功设定值</v-contextmenu-item>
-          <v-contextmenu-item @click="dialogFormVisible = true">无功设定值</v-contextmenu-item>
+          <v-contextmenu-item @click="dialogFormVisible1 = true">无功设定值</v-contextmenu-item>
       </v-contextmenu>
       <!-- Form -->
-
       <el-dialog title="有功设定值" :visible.sync="dialogFormVisible" width="30%" center="true">
         <el-form :model="form">
           <el-form-item label="设定值(KW)" :label-width="formLabelWidth">
-            <el-input v-model="form.name" placeholder="请输入值" autocomplete="off"></el-input>
+            <el-input v-model="formKW.value" placeholder="请输入值" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" @click="SetKW">确 定</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="无功设定值" :visible.sync="dialogFormVisible1" width="30%" center="true">
+        <el-form :model="form">
+          <el-form-item label="设定值(KV)" :label-width="formLabelWidth">
+            <el-input v-model="formKV.value" placeholder="请输入值" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+          <el-button type="primary" @click="SetKV">确 定</el-button>
         </div>
       </el-dialog>
   </div>
@@ -55,22 +65,72 @@ export default {
       divhideen: true,
       dialogTableVisible: false,
       dialogFormVisible: false,
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      dialogFormVisible1: false,
+      formKW: {
+        value: ''
+      },
+      formKV: {
+        value: ''
       },
       formLabelWidth: '120px'
     }
   },
   methods:{
-    handleClick(){
+    handleClick1(){
       this.$refs.contextmenu.hide()
+      this.$axios({
+        method: 'post',
+        url: '/api/values/PutSnapshot',
+        data:[{
+          "TagName":"demo.demo8",
+          "Time":"2020/06/24 19:34:00",
+          "Value":"1",
+          "Quality":"0"
+        }],
+        headers: {'content-type': 'application/json; charset=UTF-8'}
+      }).then((response) =>{console.log(response)})
+    },
+    handleClick2(){
+      this.$refs.contextmenu.hide()
+      this.$axios({
+        method: 'post',
+        url: '/api/values/PutSnapshot',
+        data:[{
+          "TagName":"demo.demo8",
+          "Time":"2020/06/24 19:34:00",
+          "Value":"0",
+          "Quality":"0"
+        }],
+        headers: {'content-type': 'application/json; charset=UTF-8'}
+      }).then((response) =>{console.log(response)})
+    },
+    SetKW(){
+      //console.log(this.formKW.value)
+      this.$axios({
+        method: 'post',
+        url: '/api/values/PutSnapshot',
+        data:[{
+          "TagName":"demo.demo9",
+          "Time":"2020/06/24 19:34:00",
+          "Value":this.formKW.value,
+          "Quality":"0"
+        }],
+        headers: {'content-type': 'application/json; charset=UTF-8'}
+      }).then((response) =>{this.dialogFormVisible = false;console.log(response)})
+    },
+    SetKV(){
+      //console.log(this.formKW.value)
+      this.$axios({
+        method: 'post',
+        url: '/api/values/PutSnapshot',
+        data:[{
+          "TagName":"demo.demo7",
+          "Time":"2020/06/24 19:34:00",
+          "Value":this.formKV.value,
+          "Quality":"0"
+        }],
+        headers: {'content-type': 'application/json; charset=UTF-8'}
+      }).then((response) =>{this.dialogFormVisible1 = false;console.log(response)})
     }
   },
   props:['WTID','activepowerkw','reactivepowerkv','activepowerdemand','reactivepowerdemand','Windspeed']

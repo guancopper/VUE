@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="divheader">
-      <p>全场有功功率:{{Totalactivepower}}</p>
-      <p>平均风速:{{AVR_windspeed}}</p>
-      <p>全场无功功率:{{Q_total}}</p>
-      <p>并网台数:{{NumWT_in_Power_production}}</p>
-      <p>通信故障台数:{{NumWT_comfail}}</p>
-      <p>样板机台数:{{NumWT_in_lock}}</p>
+      <p>全场有功功率:  {{Totalactivepower}}</p>
+      <p>平均风速:  {{AVR_windspeed}}</p>
+      <p>全场无功功率:  {{Q_total}}</p>
+      <p>并网台数:  {{NumWT_in_Power_production}}</p>
+      <p>通信故障台数:  {{NumWT_comfail}}</p>
+      <p>样板机台数:  {{NumWT_in_lock}}</p>
       <el-radio-group v-model="radio" @change="changeHandler">
           <el-radio :label="1" style="color: white;margin-top: 3px;">1-15</el-radio>
           <el-radio :label="2" style="color: white;">16-30</el-radio>
@@ -123,7 +123,7 @@ export default {
                 +"WT"+i+"."+"Windspeed"+",";
         }
       };
-      console.log(this.wt)
+      //console.log(this.wt)
       this.$axios.get("/api/info/GetInfo",{
         params: {
           start:this.start,
@@ -131,7 +131,7 @@ export default {
           tagName:this.wt
         }
       }).then((response) =>{
-        console.log(response.data.length)
+        //console.log(response.data.length)
         for(var i=0;i<response.data.length;i++){
           //console.log(response.data)
           let WTData1 = {WTID:parseFloat(response.data[i].WTID).toFixed(0),
