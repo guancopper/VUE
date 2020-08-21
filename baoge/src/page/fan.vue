@@ -78,11 +78,12 @@ export default {
   methods:{
     handleClick1(){
       this.$refs.contextmenu.hide()
+      console.log("WT"+this.WTID+"."+"activelock")
       this.$axios({
         method: 'post',
         url: '/api/values/PutSnapshot',
         data:[{
-          "TagName":"demo.demo8",
+          "TagName":"WT"+this.WTID+"."+"activelock",
           "Time":"2020/06/24 19:34:00",
           "Value":"1",
           "Quality":"0"
@@ -92,11 +93,12 @@ export default {
     },
     handleClick2(){
       this.$refs.contextmenu.hide()
+      console.log("WT"+this.WTID+"."+"activelock")
       this.$axios({
         method: 'post',
         url: '/api/values/PutSnapshot',
         data:[{
-          "TagName":"demo.demo8",
+          "TagName":"WT"+this.WTID+"."+"activelock",
           "Time":"2020/06/24 19:34:00",
           "Value":"0",
           "Quality":"0"

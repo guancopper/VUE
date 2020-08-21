@@ -9,15 +9,14 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-              target: 'http://192.168.85.131:5000/api',
+              target: 'http://localhost:53151/api',
               changeOrigin: true,
               pathRewrite: {
                 '^/api': ''
               }
             }
     },
-
-    host: '192.168.31.35',
+    host: '10.24.31.206',
     port: 8080,
     autoOpenBrowser: false,
     errorOverlay: true,
